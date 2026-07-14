@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="500" viewBox="0 0 860 500" font-family="Menlo, Consolas, monospace" font-size="12.5" xml:space="preserve">
+  <rect width="860" height="500" rx="10" fill="#101418"/>
+  <circle cx="24" cy="22" r="6" fill="#ff5f56"/>
+  <circle cx="44" cy="22" r="6" fill="#ffbd2e"/>
+  <circle cx="64" cy="22" r="6" fill="#27c93f"/>
+  <text x="430" y="27" fill="#8b949e" text-anchor="middle" font-size="12">hookstorm — did this webhook handler survive real delivery?</text>
+  <g fill="#c9d1d9">
+    <text x="24" y="58"><tspan fill="#7ee787">$</tspan> hookstorm run --target http://127.0.0.1:8080/webhook \</text>
+    <text x="24" y="76">    --receipts-url http://127.0.0.1:8080/receipts \</text>
+    <text x="24" y="94">    --events 8 --seed 13 --bad-sig 0.35 --duplicates 0.5</text>
+
+    <text x="24" y="126"><tspan fill="#79c0ff">hookstorm run</tspan> — 14 deliveries to http://127.0.0.1:8080/webhook</text>
+    <text x="24" y="144" fill="#8b949e">storm: seed 13 · 8 events · 14 deliveries · 6 duplicates · 5 bad signatures (1 wrong-key, 2 tampered, 2 missing)</text>
+
+    <text x="24" y="176" fill="#d2a8ff">checks</text>
+    <text x="24" y="196">  <tspan fill="#3fb950">PASS</tspan> signatures-enforced      <tspan fill="#8b949e">all 5 bad-signature deliveries were rejected</tspan></text>
+    <text x="24" y="216">  <tspan fill="#3fb950">PASS</tspan> handler-healthy          <tspan fill="#8b949e">all 14 deliveries got a clean response</tspan></text>
+    <text x="24" y="236">  <tspan fill="#8b949e">SKIP</tspan> retries-recover          <tspan fill="#8b949e">no delivery needed a retry</tspan></text>
+    <text x="24" y="256">  <tspan fill="#f85149">FAIL</tspan> idempotent               <tspan fill="#8b949e">3 events were processed more than once</tspan></text>
+    <text x="24" y="276" fill="#8b949e">         └─ evt_00003 processed 2 times (duplicates not de-duplicated)</text>
+    <text x="24" y="296" fill="#8b949e">         └─ evt_00006 processed 2 times (duplicates not de-duplicated)</text>
+    <text x="24" y="316" fill="#8b949e">         └─ evt_00007 processed 3 times (duplicates not de-duplicated)</text>
+    <text x="24" y="336">  <tspan fill="#3fb950">PASS</tspan> no-loss                  <tspan fill="#8b949e">every validly-delivered event was processed (5 events)</tspan></text>
+    <text x="24" y="356">  <tspan fill="#3fb950">PASS</tspan> no-spurious-processing   <tspan fill="#8b949e">the handler processed only validly-delivered events</tspan></text>
+
+    <text x="24" y="392" font-size="14">verdict: <tspan fill="#f85149" font-weight="bold">FAIL</tspan></text>
+
+    <text x="24" y="428" fill="#8b949e">The handler passed its demo. Under duplicates it double-processed three</text>
+    <text x="24" y="446" fill="#8b949e">events — a double-charge waiting to happen. Same seed, same storm, forever:</text>
+    <text x="24" y="476"><tspan fill="#7ee787">$</tspan> hookstorm run --seed 13 …</text>
+  </g>
+</svg>
